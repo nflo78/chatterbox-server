@@ -57,7 +57,8 @@ var requestHandler = function(request, response) {
     });
     request.on('end', () => {
       body = Buffer.concat(body).toString();
-      let message = JSON.parse(body);
+      var message = JSON.parse(body);
+      message.message_id = messagesStorage.length;
       messagesStorage.push(message)
       response.writeHead(statusCode, headers)
       response.end(JSON.stringify(messagesStorage))
